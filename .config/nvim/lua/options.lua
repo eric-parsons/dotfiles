@@ -37,6 +37,7 @@ vim.opt.termguicolors = true
 
 -- Folding
 vim.opt.foldnestmax = 3
+vim.opt.foldcolumn = "auto"
 
 -- Keep the cursor in the center of the screen when possible.
 -- The difference between these two approaches is that the auto command will
