@@ -1,12 +1,20 @@
 return {
     {
-        "eric-parsons/mid-century.nvim",
+        "eric-parsons/arctic.nvim",
+        priority = 1000,
         dependencies = {
             "rktjmp/lush.nvim",
         },
         config = function()
-            vim.cmd.colorscheme("mid-century")
+            vim.cmd.colorscheme("arctic")
         end,
+    },
+    {
+        "eric-parsons/mid-century.nvim",
+        priority = 1000,
+        dependencies = {
+            "rktjmp/lush.nvim",
+        },
     },
     {
         "ellisonleao/gruvbox.nvim",

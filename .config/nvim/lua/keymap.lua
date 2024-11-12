@@ -47,3 +47,12 @@ vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagn
 -- moving the cursor.
 vim.keymap.set("n", "<leader>o", [[:<C-u>call append(line("."),   repeat([""], v:count1))<CR>]])
 vim.keymap.set("n", "<leader>O", [[:<C-u>call append(line(".")-1, repeat([""], v:count1))<CR>]])
+
+-- Shortcut for setting fold method.
+vim.keymap.set("n", "<leader>zi", function()
+    vim.o.foldmethod = "indent"
+end)
+vim.keymap.set("n", "<leader>zx", function()
+    vim.o.foldmethod = "manual"
+    vim.cmd.normal("zE")
+end)

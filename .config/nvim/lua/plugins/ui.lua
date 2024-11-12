@@ -1,67 +1,68 @@
--- These are designed to work with my custom color scheme.
-local colors = {
-    pink = "#efb0a8",
-    green = "#3a9b53",
-    cyan = "#6bc6c0",
-    orange = "#e37c16",
-    red = "#dc5041",
-    bg_dark = "#2d3133",
-    fg_dark = "#2f2521",
-    fg_light = "#f9d7bc",
-    fg_disabled = "#7a7d7f",
-}
-
 return {
     {
         "nvim-lualine/lualine.nvim",
-        opts = {
-            options = {
-                theme = {
-                    normal = {
-                        a = { bg = colors.green, fg = colors.fg_dark, gui = "bold" },
-                        b = { bg = colors.bg_dark, fg = colors.fg_light },
-                        c = { bg = colors.bg_dark, fg = colors.fg_light },
+        config = function()
+            local utils = require("lualine.utils.utils")
+            -- Try to pick appropriate colors from the current theme.
+            local colors = {
+                normalBg = utils.extract_color_from_hllist("bg", { "Normal" }, "#000000"),
+                normalFg = utils.extract_color_from_hllist("fg", { "Normal" }, "#000000"),
+                insertBg = utils.extract_color_from_hllist("bg", { "Cursor" }, "#000000"),
+                insertFg = utils.extract_color_from_hllist("fg", { "Cursor" }, "#000000"),
+                visualBg = utils.extract_color_from_hllist("bg", { "Visual" }, "#000000"),
+                visualFg = utils.extract_color_from_hllist("fg", { "Visual" }, "#000000"),
+                commandBg = utils.extract_color_from_hllist("bg", { "CurSearch" }, "#000000"),
+                commandFg = utils.extract_color_from_hllist("fg", { "CurSearch" }, "#000000"),
+                statusBg = utils.extract_color_from_hllist("bg", { "StatusLine" }, "#000000"),
+                statusFg = utils.extract_color_from_hllist("fg", { "StatusLine" }, "#000000"),
+                inactiveBg = utils.extract_color_from_hllist("bg", { "StatusLineNC" }, "#000000"),
+                inactiveFg = utils.extract_color_from_hllist("fg", { "StatusLineNC" }, "#000000"),
+            }
+            require("lualine").setup({
+                options = {
+                    theme = {
+                        normal = {
+                            a = { bg = colors.normalFg, fg = colors.normalBg, gui = "bold" },
+                            b = { bg = colors.statusBg, fg = colors.statusFg },
+                            c = { bg = colors.statusBg, fg = colors.statusFg },
+                        },
+                        insert = {
+                            a = { bg = colors.insertBg, fg = colors.insertFg, gui = "bold" },
+                        },
+                        replace = {
+                            a = { bg = colors.insertBg, fg = colors.insertFg, gui = "bold" },
+                        },
+                        visual = {
+                            a = { bg = colors.visualBg, fg = colors.visualFg, gui = "bold" },
+                        },
+                        command = {
+                            a = { bg = colors.commandBg, fg = colors.commandFg, gui = "bold" },
+                        },
+                        inactive = {
+                            c = { bg = colors.inactiveBg, fg = colors.inactiveFg },
+                        },
                     },
-                    insert = {
-                        a = { bg = colors.pink, fg = colors.fg_dark, gui = "bold"  },
-                        c = { bg = colors.pink, fg = colors.fg_dark },
+                    component_separators = "|",
+                    section_separators = { left = "", right = "" },
+                },
+                sections = {
+                    lualine_a = {
+                        { "mode", separator = { left = "", right = "" }, padding = 2 },
                     },
-                    visual = {
-                        a = { bg = colors.cyan, fg = colors.fg_dark, gui = "bold"  },
-                        c = { bg = colors.cyan, fg = colors.fg_dark },
+                    lualine_b = {
+                        { "filename", "branch", padding = 2 },
                     },
-                    command = {
-                        a = { bg = colors.orange, fg = colors.fg_dark, gui = "bold"  },
-                        c = { bg = colors.orange, fg = colors.fg_dark },
+                    lualine_c = {},
+                    lualine_x = {},
+                    lualine_y = {
+                        { "filetype", padding = 2 },
                     },
-                    replace = {
-                        a = { bg = colors.red, fg = colors.fg_light, gui = "bold"  },
-                        c = { bg = colors.red, fg = colors.fg_light },
-                    },
-                    inactive = {
-                        c = { bg = colors.bg_dark, fg = colors.fg_disabled }
+                    lualine_z = {
+                        { "location", padding = 2 },
                     },
                 },
-                component_separators = "|",
-                section_separators = { left = "", right = "" },
-            },
-            sections = {
-                lualine_a = {
-                    { "mode", separator = { left = "", right =  "" }, padding = 2 },
-                },
-                lualine_b = {
-                    { "filename", "branch", padding = 2 },
-                },
-                lualine_c = {},
-                lualine_x = {},
-                lualine_y = {
-                    { "filetype", padding = 2 },
-                },
-                lualine_z = {
-                    { "location", padding = 2 },
-                },
-            },
-        },
+            })
+        end,
     },
     {
         -- Add indentation guides even on blank lines
@@ -70,4 +71,3 @@ return {
         opts = {},
     },
 }
-

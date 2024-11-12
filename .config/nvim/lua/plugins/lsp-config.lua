@@ -1,5 +1,6 @@
 return {
     "neovim/nvim-lspconfig",
+    event = { "BufReadPre", "BufNewFile" },
     config = function()
         local lspconfig = require("lspconfig")
 
@@ -53,13 +54,13 @@ return {
             vim.opt.formatexpr = nil
         end
 
-        lspconfig.cssls.setup {
+        lspconfig.cssls.setup({
             on_attach = on_attach,
-        }
-        lspconfig.html.setup {
+        })
+        lspconfig.html.setup({
             on_attach = on_attach,
-        }
-        lspconfig.lua_ls.setup {
+        })
+        lspconfig.lua_ls.setup({
             on_attach = on_attach,
 
             settings = { -- custom settings for lua
@@ -76,11 +77,11 @@ return {
                         },
                     },
                 },
-            }
-        }
+            },
+        })
 
-        lspconfig.tsserver.setup {
+        lspconfig.ts_ls.setup({
             on_attach = on_attach,
-        }
-    end
+        })
+    end,
 }

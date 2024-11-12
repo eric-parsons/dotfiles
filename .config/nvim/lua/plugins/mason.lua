@@ -11,7 +11,7 @@ return {
                 "cssls",
                 "html",
                 "lua_ls",
-                "tsserver",
+                "ts_ls",
             }
         })
         require("mason-tool-installer").setup({

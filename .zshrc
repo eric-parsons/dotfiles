@@ -1,4 +1,4 @@
-DEFAULT_USER=eparsons
+DEFAULT_USER=eric
 
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
@@ -13,7 +13,7 @@ export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="agnoster"
 
 # Expand aliases with Tab key instead of Ctrl-X + A.
-autoload -Uz compinit; compinit;
+# autoload -Uz compinit; compinit;
 bindkey "^Xa" _expand_alias
 zstyle ':completion:*' completer _expand_alias _complete _ignored
 zstyle ':completion:*' regular true
