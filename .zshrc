@@ -36,6 +36,8 @@ source $ZSH/oh-my-zsh.sh
 # Preferred editor for local and remote sessions
 export EDITOR='mvim'
 
+alias e=nvim
+
 # Alias to manage bare repo which is used for versioning dotfiles in the home
 # directory.
 alias df="git --git-dir=$HOME/dotfiles/ --work-tree=$HOME"
