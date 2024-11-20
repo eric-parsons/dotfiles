@@ -12,7 +12,7 @@ return {
         })
 
         vim.keymap.set("n", "<leader>ee", "<cmd>NvimTreeFocus<cr>")
-        vim.keymap.set("n", "<leader>ex", "<cmd>NvimTreeClose<cr>")
+        vim.keymap.set("n", "<leader>eq", "<cmd>NvimTreeClose<cr>")
         vim.keymap.set("n", "<leader>ef", "<cmd>NvimTreeFindFile<cr>")
         vim.keymap.set("n", "<leader>er", "<cmd>NvimTreeRefresh<cr>")
         vim.keymap.set("n", "<leader>ec", "<cmd>NvimTreeCollapse<cr>")
