@@ -1,0 +1,14 @@
+# This is Git's per-user configuration file.
+[user]
+	name = Eric Parsons
+	email = eric.d.parsons@protonmail.com
+[core]
+	autocrlf = input
+[pull]
+	rebase = false
+[diff]
+	tool = nvimdiff
+[difftool "nvimdiff"]
+    cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
+[init]
+	defaultBranch = master
