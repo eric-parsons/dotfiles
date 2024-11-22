@@ -1,15 +1,8 @@
-DEFAULT_USER=eric
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
-
-# Set name of the theme to load --- if set to "random", it will
-# load a random theme each time oh-my-zsh is loaded, in which case,
-# to know which specific one was loaded, run: echo $RANDOM_THEME
-# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="agnoster"
 
 # Expand aliases with Tab key instead of Ctrl-X + A.
 # autoload -Uz compinit; compinit;
@@ -51,3 +44,6 @@ alias ntw="npm run test-watch"
 alias nl="npm run lint"
 alias np="npm run prettier"
 
+# Set up prompt. NB: needs to come after oh-my-zsh.sh above or else transient
+# prompts don't work.
+eval "$(oh-my-posh init zsh --config ~/.config/oh-my-posh/custom.toml)"
