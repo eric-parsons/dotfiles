@@ -8,6 +8,11 @@ final_space = true
   foreground = 'red'
   template = '❱ '
 
+[secondary_prompt]
+  background = 'transparent'
+  foreground = 'red'
+  template = '<lightYellow>╰─</>❱ '
+
 [[blocks]]
   type = 'prompt'
   alignment = 'left'
