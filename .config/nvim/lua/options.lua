@@ -11,8 +11,6 @@ vim.opt.smartindent = true
 vim.opt.splitright = true
 vim.opt.splitbelow = true
 
-vim.opt.cursorline = true
-
 vim.opt.number = true
 vim.opt.relativenumber = true
 
