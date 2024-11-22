@@ -1,5 +1,4 @@
 DEFAULT_USER=eric
-
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -34,7 +33,7 @@ source $ZSH/oh-my-zsh.sh
 # export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
-export EDITOR='mvim'
+export EDITOR='nvim'
 
 alias e=nvim
 
@@ -48,7 +47,7 @@ alias ns="npm start"
 alias nb="npm run build"
 alias nbw="npm run build-watch"
 alias nt="npm test"
-alias ntw="npm test-watch"
+alias ntw="npm run test-watch"
 alias nl="npm run lint"
 alias np="npm run prettier"
 
