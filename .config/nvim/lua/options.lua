@@ -21,6 +21,14 @@ vim.opt.hlsearch = false
 -- Disable mouse mode
 vim.opt.mouse = ""
 
+-- Make background transparent.
+vim.cmd [[
+  highlight Normal guibg=none
+  highlight NonText guibg=none
+  highlight Normal ctermbg=none
+  highlight NonText ctermbg=none
+]]
+
 -- Sync clipboard between OS and Neovim.
 vim.opt.clipboard = "unnamedplus"
 

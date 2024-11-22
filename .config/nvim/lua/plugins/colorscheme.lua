@@ -1,13 +1,27 @@
 return {
     {
-        "eric-parsons/arctic.nvim",
+        "eric-parsons/cybercrime.nvim",
         priority = 1000,
         dependencies = {
             "rktjmp/lush.nvim",
         },
         config = function()
-            vim.cmd.colorscheme("arctic")
+            vim.cmd.colorscheme("cybercrime")
+            -- Make background transparent.
+            vim.cmd([[
+                highlight Normal guibg=none
+                highlight NonText guibg=none
+                highlight Normal ctermbg=none
+                highlight NonText ctermbg=none
+            ]])
         end,
+    },
+    {
+        "eric-parsons/arctic.nvim",
+        priority = 1000,
+        dependencies = {
+            "rktjmp/lush.nvim",
+        },
     },
     {
         "eric-parsons/mid-century.nvim",
