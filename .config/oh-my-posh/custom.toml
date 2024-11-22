@@ -22,13 +22,13 @@ final_space = true
     type = 'session'
     style = 'plain'
     foreground = 'lightYellow'
-    template = '╭─ {{ .UserName }}'
+    template = '╭──  {{ .UserName }} '
 
   [[blocks.segments]]
     type = 'path'
     style = 'plain'
     foreground = 'lightYellow'
-    template = '── {{ .PWD }}'
+    template = '──  {{ .PWD }} '
 
     [blocks.segments.properties]
       style = 'folder'
@@ -37,10 +37,15 @@ final_space = true
     type = 'git'
     style = 'plain'
     foreground = 'lightYellow'
-    template = '──{{ .HEAD }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }} \uF044 {{ .Working.String }}{{ end }}{{ if and (.Staging.Changed) (.Working.Changed) }} |{{ end }}{{ if .Staging.Changed }} \uF046 {{ .Staging.String }}{{ end }}'
+    template = '── {{ .HEAD }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }} \uF044 {{ .Working.String }}{{ end }}{{ if and (.Staging.Changed) (.Working.Changed) }} |{{ end }}{{ if .Staging.Changed }} \uF046 {{ .Staging.String }}{{ end }} '
 
     [blocks.segments.properties]
       branch_icon = ' '
+
+  [[blocks.segments]]
+    type = 'status'
+    foreground = 'magenta'
+    template = '──  {{ reason .Code }} '
 
 [[blocks]]
   type = 'prompt'
@@ -48,10 +53,9 @@ final_space = true
   alignment = 'left'
 
   [[blocks.segments]]
-    type = 'status'
-    foreground = 'magenta'
-    template = '<lightYellow>├─</> {{ reason .Code }}'
-
+    type = 'text'
+    foreground = 'lightYellow'
+    template = '│'
     
 [[blocks]]
   type = 'prompt'
@@ -61,5 +65,5 @@ final_space = true
   [[blocks.segments]]
     type = 'text'
     foreground = 'red'
-    template = '<lightYellow>╰─</><green>❱</><lightRed>❱</>❱'
+    template = '<lightYellow>╰──</><green>❱</><lightRed>❱</>❱'
 
