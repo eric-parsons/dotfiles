@@ -6,7 +6,7 @@ return {
         dashboard.section.buttons.val = {
             dashboard.button("SPC SPC", "󰱼   Find File"),
             dashboard.button("SPC f s", "󱎸   Find String"),
-            dashboard.button("SPC f r", "   Recent"),
+            dashboard.button("SPC f r", "󱑂   Recent"),
             dashboard.button("SPC e e", "   Browse"),
             dashboard.button("n", "   New File", ":ene <BAR> startinsert <CR>"),
             dashboard.button("q", "󰩈   Quit Neovim", ":qa<CR>"),
