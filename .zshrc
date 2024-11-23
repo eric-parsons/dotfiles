@@ -5,7 +5,7 @@
 export ZSH="$HOME/.oh-my-zsh"
 
 # Expand aliases with Tab key instead of Ctrl-X + A.
-# autoload -Uz compinit; compinit;
+autoload -Uz compinit; compinit;
 bindkey "^Xa" _expand_alias
 zstyle ':completion:*' completer _expand_alias _complete _ignored
 zstyle ':completion:*' regular true
