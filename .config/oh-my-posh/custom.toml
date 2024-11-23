@@ -10,8 +10,8 @@ final_space = true
 
 [secondary_prompt]
   background = 'transparent'
-  foreground = 'red'
-  template = '<lightYellow>╰─</>❱ '
+  foreground = 'yellow'
+  template = '╰─<red>❱</> '
 
 [[blocks]]
   type = 'prompt'
@@ -20,32 +20,45 @@ final_space = true
 
   [[blocks.segments]]
     type = 'session'
-    style = 'plain'
-    foreground = 'lightYellow'
-    template = '╭─ {{ .UserName }}'
+    background = 'lightYellow'
+    foreground = 'transparent'
+    style = 'diamond'
+    leading_diamond = '<yellow,transparent>╭──</>'
+    trailing_diamond = '<yellow,transparent></>'
+    template = ' {{ .UserName }}'
 
   [[blocks.segments]]
     type = 'path'
-    style = 'plain'
-    foreground = 'lightYellow'
-    template = '── {{ .PWD }}'
+    background = 'lightYellow'
+    foreground = 'transparent'
+    style = 'diamond'
+    leading_diamond = '<yellow,transparent>──</>'
+    trailing_diamond = '<yellow,transparent></>'
+    template = ' {{ .PWD }}'
 
     [blocks.segments.properties]
       style = 'folder'
 
   [[blocks.segments]]
     type = 'git'
-    style = 'plain'
-    foreground = 'lightYellow'
-    template = '── {{ .HEAD }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }} \uF044 {{ .Working.String }}{{ end }}{{ if and (.Staging.Changed) (.Working.Changed) }} |{{ end }}{{ if .Staging.Changed }} \uF046 {{ .Staging.String }}{{ end }}'
+    background = 'lightYellow'
+    foreground = 'transparent'
+    style = 'diamond'
+    leading_diamond = '<yellow,transparent>──</>'
+    trailing_diamond = '<yellow,transparent></>'
+    template = ' {{ .HEAD }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }} \uF044 {{ .Working.String }}{{ end }}{{ if and (.Staging.Changed) (.Working.Changed) }} |{{ end }}{{ if .Staging.Changed }} \uF046 {{ .Staging.String }}{{ end }}'
 
     [blocks.segments.properties]
       branch_icon = ''
 
   [[blocks.segments]]
     type = 'status'
-    foreground = 'magenta'
-    template = '── {{ reason .Code }}'
+    background = 'magenta'
+    foreground = 'white'
+    style = 'diamond'
+    leading_diamond = '<yellow,transparent>──</>'
+    trailing_diamond = '<yellow,transparent></>'
+    template = ' {{ reason .Code }}'
 
 [[blocks]]
   type = 'prompt'
@@ -54,7 +67,7 @@ final_space = true
 
   [[blocks.segments]]
     type = 'text'
-    foreground = 'lightYellow'
+    foreground = 'yellow'
     template = '│'
     
 [[blocks]]
@@ -64,6 +77,6 @@ final_space = true
 
   [[blocks.segments]]
     type = 'text'
-    foreground = 'lightYellow'
-    template = '╰─</><green>❱</><lightRed>❱</><red>❱</>'
+    foreground = 'yellow'
+    template = '╰──</><green>❱</><lightRed>❱</><red>❱</>'
 
