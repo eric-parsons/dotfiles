@@ -1,7 +1,6 @@
 return {
     {
         "nvim-telescope/telescope.nvim",
-        branch = "0.1.x",
         dependencies = {
             "nvim-lua/plenary.nvim",
             -- Fuzzy Finder Algorithm which requires local dependencies to be built.
@@ -25,8 +24,16 @@ return {
                     path_display = { "truncate " },
                     mappings = {
                         i = {
-                            ["<C-k>"] = actions.move_selection_previous, -- move to prev result
-                            ["<C-j>"] = actions.move_selection_next, -- move to next result
+                            -- Avoids having to press Esc twice to exit a
+                            -- Telescope window, at the expense of not being
+                            -- able to switch to normal mode, which I never use
+                            -- anyway.
+                            ["<esc>"] = actions.close,
+                            -- Handy when using normal QWERTY keyboard, but
+                            -- arrow up/down and pg up/down work better on
+                            -- custom keyboards.
+                            ["<C-k>"] = actions.move_selection_previous,
+                            ["<C-j>"] = actions.move_selection_next,
                         },
                     },
                 },
@@ -34,21 +41,35 @@ return {
 
             telescope.load_extension("fzf")
 
-            -- set keymaps
-            local keymap = vim.keymap -- for conciseness
+            -- Set keymaps.
+            local keymap = vim.keymap
+            local opts = { noremap = true, silent = true }
 
-            keymap.set("n", "<leader><space>", builtin.find_files, { desc = "Fuzzy find files in cwd" })
-            keymap.set("n", "<leader>fr", builtin.oldfiles, { desc = "Fuzzy find recent files" })
-            keymap.set("n", "<leader>fs", builtin.live_grep, { desc = "Fuzzy find string in cwd" })
-            keymap.set("n", "<leader>b", builtin.buffers, { desc = "List buffers" })
+            opts.desc = "Find files in cwd"
+            keymap.set("n", "<leader><space>", builtin.find_files, opts)
+
+            opts.desc = "Find recent files"
+            keymap.set("n", "<leader>fr", builtin.oldfiles, opts)
+
+            opts.desc = "Find string in cwd"
+            keymap.set("n", "<leader>fs", builtin.live_grep, opts)
+
+            opts.desc = "List buffers"
+            keymap.set("n", "<leader>l", builtin.buffers, opts)
+
+            opts.desc = "Fuzzy search in current buffer"
             keymap.set("n", "<leader>/", function()
                 builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown {
                     winblend = 10,
                     previewer = false,
                 })
-            end, { desc = "[/] Fuzzily search in current buffer" })
-            keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "Fuzzy find help" })
-            keymap.set("n", "<leader>fp", builtin.resume, { desc = "Resume previous find" })
+            end, opts)
+
+            opts.desc = "Find in help"
+            keymap.set("n", "<leader>fh", builtin.help_tags, opts)
+
+            opts.desc = "Resume previous search"
+            keymap.set("n", "<leader>fp", builtin.resume, opts)
         end
     },
 }

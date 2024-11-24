@@ -16,32 +16,29 @@ return {
             ]])
         end,
     },
-    {
-        "eric-parsons/arctic.nvim",
-        priority = 1000,
-        dependencies = {
-            "rktjmp/lush.nvim",
-        },
-    },
-    {
-        "eric-parsons/mid-century.nvim",
-        priority = 1000,
-        dependencies = {
-            "rktjmp/lush.nvim",
-        },
-    },
-    {
-        "ellisonleao/gruvbox.nvim",
-        priority = 1000,
-        opts = {
-            italic = {
-                strings = false,
-            },
-        },
-    },
-    {
-        "catppuccin/nvim",
-        name = "catppuccin",
-        priority = 1000,
-    },
+
+    -- {
+    --     "eric-parsons/arctic.nvim",
+    --     dependencies = {
+    --         "rktjmp/lush.nvim",
+    --     },
+    -- },
+    -- {
+    --     "eric-parsons/mid-century.nvim",
+    --     dependencies = {
+    --         "rktjmp/lush.nvim",
+    --     },
+    -- },
+    -- {
+    --     "ellisonleao/gruvbox.nvim",
+    --     opts = {
+    --         italic = {
+    --             strings = false,
+    --         },
+    --     },
+    -- },
+    -- {
+    --     "catppuccin/nvim",
+    --     name = "catppuccin",
+    -- },
 }

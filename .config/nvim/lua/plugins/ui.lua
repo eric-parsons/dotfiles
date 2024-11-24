@@ -47,7 +47,18 @@ return {
                 },
                 sections = {
                     lualine_a = {
-                        { "mode", separator = { left = "", right = "" }, padding = 2 },
+                        {
+                            "mode",
+                            separator = { left = "", right = "" },
+                            padding = 1,
+                            fmt = function(s)
+                                if s == "NORMAL" then
+                                    return ""
+                                else
+                                    return s
+                                end
+                            end,
+                        },
                     },
                     lualine_b = {
                         { "filename", "branch", padding = 2 },

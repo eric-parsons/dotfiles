@@ -1,58 +1,110 @@
-vim.g.mapleader = " "
+-- NOTE: See also the config for LSP, file tree, and Telescope which also add
+-- keymaps.
 
-vim.keymap.set("i", "kj", "<Esc>")
-vim.keymap.set("i", "jk", "<Esc>")
+local keymap = vim.keymap
+local opts = { noremap = true, silent = true }
+
+-- ((( Leader Key )))
+
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
+
+-- Disable space key since we are using it as the leader.
+keymap.set({ "n", "v" }, "<space>", "<Nop>", opts)
+
+-- ((( General )))
+
+-- Make common commands a bit faster. Saving one or two characters doesn't seem
+-- like a big deal, but these are used a LOT. Also, about 10% of the time that
+-- I try to quickly type e.g. ":w", it comes out as ":W" because the shift key
+-- wasn't released quickly enough after typing ":". This avoids timing issues.
+opts.desc = "Write current buffer"
+keymap.set("n", "<leader>w", "<cmd>w<cr>", opts)
+
+opts.desc = "Write all buffers"
+keymap.set("n", "<leader>W", "<cmd>wa<cr>", opts)
+
+opts.desc = "Close window"
+keymap.set("n", "<leader>q", "<cmd>q<cr>", opts)
+
+opts.desc = "Write all bufeers and close all windows"
+keymap.set("n", "<leader>Q", "<cmd>wqa<cr>", opts)
 
 -- Move highlighted lines up/down.
-vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
-vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
+opts.desc = "Move selection down one line"
+keymap.set("v", "<s-down>", ":m '>+1<cr>gv=gv", opts)
+keymap.set("v", "J", ":m '>+1<cr>gv=gv", opts)
 
--- This apparently turns on line numbers in netrw, but it might also summon a
--- demon so be careful!
-vim.cmd([[let g:netrw_bufsettings = "noma nomod nu nobl nowrap ro"]])
+opts.desc = "Move selection up one line"
+keymap.set("v", "K", ":m '<-2<cr>gv=gv", opts)
+keymap.set("v", "<s-up>", ":m '<-2<cr>gv=gv", opts)
 
--- Whole file search and replace.
-vim.keymap.set("n", "<Leader>rp", ":%s//g<Left><Left>")
-
--- Keymaps for better default experience.
-vim.keymap.set({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
-
--- Remap for dealing with word wrap.
-vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
-vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
-
--- Make it easier to move around windows.
-vim.keymap.set("n", "<c-h>", "<c-w>h")
-vim.keymap.set("n", "<c-j>", "<c-w>j")
-vim.keymap.set("n", "<c-k>", "<c-w>k")
-vim.keymap.set("n", "<c-l>", "<c-w>l")
-
-vim.keymap.set("n", "<Leader><Left>", "<c-w>h")
-vim.keymap.set("n", "<Leader><Down>", "<c-w>j")
-vim.keymap.set("n", "<Leader><Up>", "<c-w>k")
-vim.keymap.set("n", "<Leader><Right>", "<c-w>l")
-
--- Diagnostic keymaps.
-vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic message" })
-vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Go to next diagnostic message" })
-vim.keymap.set(
-    "n",
-    "<leader>e",
-    vim.diagnostic.open_float,
-    { desc = "Open floating diagnostic message" }
-)
-vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostics list" })
+-- When deleting a single character, don't overwrite whatever was last yanked.
+opts.desc = "Delete character"
+keymap.set("n", "x", '"_x')
 
 -- Allow inserting blank line before/after without leaving normal mode or
 -- moving the cursor.
-vim.keymap.set("n", "<leader>o", [[:<C-u>call append(line("."),   repeat([""], v:count1))<CR>]])
-vim.keymap.set("n", "<leader>O", [[:<C-u>call append(line(".")-1, repeat([""], v:count1))<CR>]])
+opts.desc = "Add blank line below"
+keymap.set("n", "<leader>o", [[:<C-u>call append(line("."),   repeat([""], v:count1))<cr>]], opts)
 
--- Shortcut for setting fold method.
-vim.keymap.set("n", "<leader>zi", function()
+opts.desc = "Add blank line above"
+keymap.set("n", "<leader>O", [[:<C-u>call append(line(".")-1, repeat([""], v:count1))<cr>]], opts)
+
+-- Whole file search and replace. These allow you to simply type "old/new"
+-- after.
+opts.desc = "Replace all in current buffer"
+keymap.set("n", "<leader>ra", ":%s//g<left><left>", opts)
+opts.desc = "Replace with confirmation in current buffer"
+keymap.set("n", "<leader>rc", ":%s//gc<left><left>", opts)
+
+-- Remap for dealing with word wrap.
+keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
+keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+
+-- ((( Windows )))
+
+-- Make it easier to move around windows.
+opts.desc = "Go one window left"
+keymap.set("n", "<s-left>", "<c-w>h", opts)
+keymap.set("n", "<c-h>", "<c-w>h", opts)
+
+opts.desc = "Go one window down"
+keymap.set("n", "<s-down>", "<c-w>j", opts)
+keymap.set("n", "<c-j>", "<c-w>j", opts)
+
+opts.desc = "Go one window up"
+keymap.set("n", "<s-up>", "<c-w>k", opts)
+keymap.set("n", "<c-k>", "<c-w>k", opts)
+
+opts.desc = "Go one window right"
+keymap.set("n", "<s-right>", "<c-w>l", opts)
+keymap.set("n", "<c-l>", "<c-w>l", opts)
+
+-- ((( Buffers )))
+
+--NOTE: <leader>l is mapped in the Telescope settings to view the buffer list.
+
+opts.desc = "Next buffer"
+keymap.set("n", "<tab>", "<cmd>bn<cr>", opts)
+
+opts.desc = "Previous buffer"
+keymap.set("n", "<s-tab>", "<cmd>bp<cr>", opts)
+
+-- Close current buffer without closing its window/tab. Not 100% perfect, but
+-- still better than normal ":bd".
+opts.desc = "Close current buffer"
+keymap.set("n", "<leader>bd", "<cmd>bp|bd#<cr>", opts)
+
+-- ((( Folds )))
+
+opts.desc = "Enable folds (indent)"
+keymap.set("n", "<leader>zi", function()
     vim.o.foldmethod = "indent"
-end)
-vim.keymap.set("n", "<leader>zx", function()
+end, opts)
+
+opts.desc = "Remove folds"
+keymap.set("n", "<leader>zq", function()
     vim.o.foldmethod = "manual"
     vim.cmd.normal("zE")
-end)
+end, opts)
