@@ -42,14 +42,14 @@ return {
                             c = { bg = colors.inactiveBg, fg = colors.inactiveFg },
                         },
                     },
-                    component_separators = "|",
+                    component_separators = "/",
                     section_separators = { left = "", right = "" },
                 },
                 sections = {
                     lualine_a = {
                         {
                             "mode",
-                            separator = { left = "", right = "" },
+                            separator = { left = " ", right = "" },
                             padding = 1,
                             fmt = function(s)
                                 if s == "NORMAL" then
@@ -61,16 +61,27 @@ return {
                         },
                     },
                     lualine_b = {
-                        { "filename", "branch", padding = 2 },
+                        {
+                            "location",
+                            fmt = function(s)
+                                return " Ln:"
+                                    .. string.gsub(string.gsub(s, ":", " Col:"), "^%s+", "")
+                            end,
+                        },
                     },
-                    lualine_c = {},
-                    lualine_x = {},
-                    lualine_y = {
-                        { "filetype", padding = 2 },
-                    },
+                    lualine_c = { "progress" },
+                    lualine_x = { "filetype" },
+                    lualine_y = { { "fileformat", padding = 2 } },
                     lualine_z = {
-                        { "location", padding = 2 },
+                        {
+                            "filename",
+                            separator = { left = "", right = " " },
+                        },
                     },
+                },
+                inactive_sections = {
+                    lualine_c = {},
+                    lualine_x = { "filename" },
                 },
             })
         end,

@@ -50,26 +50,68 @@ return {
                     lookahead = true,
                     keymaps = {
                         -- You can use the capture groups defined in textobjects.scm
-                        ["a="] = { query = "@assignment.outer", desc = "Select outer part of an assignment" },
-                        ["i="] = { query = "@assignment.inner", desc = "Select inner part of an assignment" },
-                        ["l="] = { query = "@assignment.lhs", desc = "Select left hand side of an assignment" },
-                        ["r="] = { query = "@assignment.rhs", desc = "Select right hand side of an assignment" },
+                        ["a="] = {
+                            query = "@assignment.outer",
+                            desc = "Select outer part of an assignment",
+                        },
+                        ["i="] = {
+                            query = "@assignment.inner",
+                            desc = "Select inner part of an assignment",
+                        },
+                        ["l="] = {
+                            query = "@assignment.lhs",
+                            desc = "Select left hand side of an assignment",
+                        },
+                        ["r="] = {
+                            query = "@assignment.rhs",
+                            desc = "Select right hand side of an assignment",
+                        },
 
                         -- Works for JS/TS/JSON files (custom capture I created
                         -- in after/queries/ecma/textobjects.scm)
-                        ["a:"] = { query = "@property.outer", desc = "Select outer part of an object property" },
-                        ["i:"] = { query = "@property.inner", desc = "Select inner part of an object property" },
-                        ["l:"] = { query = "@property.lhs", desc = "Select left part of an object property" },
-                        ["r:"] = { query = "@property.rhs", desc = "Select right part of an object property" },
+                        ["a:"] = {
+                            query = "@property.outer",
+                            desc = "Select outer part of an object property",
+                        },
+                        ["i:"] = {
+                            query = "@property.inner",
+                            desc = "Select inner part of an object property",
+                        },
+                        ["l:"] = {
+                            query = "@property.lhs",
+                            desc = "Select left part of an object property",
+                        },
+                        ["r:"] = {
+                            query = "@property.rhs",
+                            desc = "Select right part of an object property",
+                        },
 
-                        ["aa"] = { query = "@parameter.outer", desc = "Select outer part of a parameter/argument" },
-                        ["ia"] = { query = "@parameter.inner", desc = "Select inner part of a parameter/argument" },
+                        ["aa"] = {
+                            query = "@parameter.outer",
+                            desc = "Select outer part of a parameter/argument",
+                        },
+                        ["ia"] = {
+                            query = "@parameter.inner",
+                            desc = "Select inner part of a parameter/argument",
+                        },
 
-                        ["af"] = { query = "@call.outer", desc = "Select outer part of a function call" },
-                        ["if"] = { query = "@call.inner", desc = "Select inner part of a function call" },
+                        ["af"] = {
+                            query = "@call.outer",
+                            desc = "Select outer part of a function call",
+                        },
+                        ["if"] = {
+                            query = "@call.inner",
+                            desc = "Select inner part of a function call",
+                        },
 
-                        ["am"] = { query = "@function.outer", desc = "Select outer part of a method/function definition" },
-                        ["im"] = { query = "@function.inner", desc = "Select inner part of a method/function definition" },
+                        ["am"] = {
+                            query = "@function.outer",
+                            desc = "Select outer part of a method/function definition",
+                        },
+                        ["im"] = {
+                            query = "@function.inner",
+                            desc = "Select inner part of a method/function definition",
+                        },
 
                         ["ac"] = { query = "@class.outer", desc = "Select outer part of a class" },
                         ["ic"] = { query = "@class.inner", desc = "Select inner part of a class" },
@@ -105,30 +147,31 @@ return {
                     enable = true,
                     swap_next = {
                         ["<leader>xa"] = "@parameter.inner", -- swap parameters/argument with next
-                        ["<leader>x:"] = "@property.outer", -- swap object property with next
-                        ["<leader>xm"] = "@function.outer", -- swap function with next
+                        ["<leader>x:"] = "@property.outer",  -- swap object property with next
+                        ["<leader>xm"] = "@function.outer",  -- swap function with next
                     },
                     swap_previous = {
                         ["<leader>Xa"] = "@parameter.inner", -- swap parameters/argument with prev
-                        ["<leader>X:"] = "@property.outer", -- swap object property with prev
-                        ["<leader>Xm"] = "@function.outer", -- swap function with previous
+                        ["<leader>X:"] = "@property.outer",  -- swap object property with prev
+                        ["<leader>Xm"] = "@function.outer",  -- swap function with previous
                     },
                 },
             },
         },
-        config = function (_, opts)
+        config = function(_, opts)
             require("nvim-treesitter.configs").setup(opts)
             local ts_repeat_move = require("nvim-treesitter.textobjects.repeatable_move")
+            local keymap = vim.keymap
 
             -- Make TS text objects repeatable with the usual shortcuts.
-            vim.keymap.set({ "n", "x", "o" }, ";", ts_repeat_move.repeat_last_move)
-            vim.keymap.set({ "n", "x", "o" }, ",", ts_repeat_move.repeat_last_move_opposite)
+            keymap.set({ "n", "x", "o" }, ";", ts_repeat_move.repeat_last_move)
+            keymap.set({ "n", "x", "o" }, ",", ts_repeat_move.repeat_last_move_opposite)
 
             -- Necessary to avoid losing repeatabilty for built in motions.
-            vim.keymap.set({ "n", "x", "o" }, "f", ts_repeat_move.builtin_f)
-            vim.keymap.set({ "n", "x", "o" }, "F", ts_repeat_move.builtin_F)
-            vim.keymap.set({ "n", "x", "o" }, "t", ts_repeat_move.builtin_t)
-            vim.keymap.set({ "n", "x", "o" }, "T", ts_repeat_move.builtin_T)
+            keymap.set({ "n", "x", "o" }, "f", ts_repeat_move.builtin_f_expr, { expr = true })
+            keymap.set({ "n", "x", "o" }, "F", ts_repeat_move.builtin_F_expr, { expr = true })
+            keymap.set({ "n", "x", "o" }, "t", ts_repeat_move.builtin_t_expr, { expr = true })
+            keymap.set({ "n", "x", "o" }, "T", ts_repeat_move.builtin_T_expr, { expr = true })
         end,
     },
 }
