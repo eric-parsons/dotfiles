@@ -29,6 +29,8 @@ source $ZSH/oh-my-zsh.sh
 export EDITOR='nvim'
 
 alias e=nvim
+alias lzg=lazygit
+alias bd=popd
 
 # Alias to manage bare repo which is used for versioning dotfiles in the home
 # directory.
