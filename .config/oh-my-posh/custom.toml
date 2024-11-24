@@ -19,20 +19,11 @@ final_space = true
   newline = true
 
   [[blocks.segments]]
-    type = 'session'
-    background = 'lightYellow'
-    foreground = 'transparent'
-    style = 'diamond'
-    leading_diamond = '<yellow,transparent>╭──</>'
-    trailing_diamond = '<yellow,transparent></>'
-    template = ' {{ .UserName }}'
-
-  [[blocks.segments]]
     type = 'path'
     background = 'lightYellow'
     foreground = 'transparent'
     style = 'diamond'
-    leading_diamond = '<yellow,transparent>──</>'
+    leading_diamond = '<yellow,transparent>╭─</>'
     trailing_diamond = '<yellow,transparent></>'
     template = ' {{ .PWD }}'
 
@@ -50,6 +41,15 @@ final_space = true
 
     [blocks.segments.properties]
       branch_icon = ''
+
+  [[blocks.segments]]
+    type = 'session'
+    background = 'lightYellow'
+    foreground = 'transparent'
+    style = 'diamond'
+    leading_diamond = '<yellow,transparent>──</>'
+    trailing_diamond = '<yellow,transparent></>'
+    template = ' {{ .UserName }}'
 
   [[blocks.segments]]
     type = 'status'
@@ -78,5 +78,5 @@ final_space = true
   [[blocks.segments]]
     type = 'text'
     foreground = 'yellow'
-    template = '╰──</><green>❱</><lightRed>❱</><red>❱</>'
+    template = '╰─</><green>❱</><lightRed>❱</><red>❱</>'
 
