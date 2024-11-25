@@ -60,22 +60,22 @@ return {
                             end,
                         },
                     },
-                    lualine_b = {
-                        {
-                            "location",
-                            fmt = function(s)
-                                return " Ln:"
-                                    .. string.gsub(string.gsub(s, ":", " Col:"), "^%s+", "")
-                            end,
-                        },
-                    },
-                    lualine_c = { "progress" },
+                    lualine_b = { "filename" },
+                    lualine_c = {},
                     lualine_x = { "filetype" },
                     lualine_y = { { "fileformat", padding = 2 } },
                     lualine_z = {
                         {
-                            "filename",
-                            separator = { left = "", right = " " },
+                            "location",
+                            separator = { left = "" },
+                            padding = 0,
+                            fmt = function(s)
+                                return string.gsub(string.gsub(s, ":", " C:"), "^%s*", " L:")
+                            end,
+                        },
+                        {
+                            "progress",
+                            separator = { right = " " },
                         },
                     },
                 },

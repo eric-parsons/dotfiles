@@ -6,10 +6,9 @@ return {
         dashboard.section.buttons.val = {
             dashboard.button("SPC f r", "󱑂  Recent"),
             dashboard.button("SPC SPC", "󰱼  Find File"),
-            dashboard.button("SPC f s", "󱎸  Find String"),
             dashboard.button("SPC e e", "  Browse"),
             dashboard.button("n", "  New File", ":ene <BAR> startinsert <CR>"),
-            dashboard.button("q", "󰩈  Quit Neovim", ":qa<CR>"),
+            dashboard.button("q", "󰩈  Quit", ":qa<CR>"),
         }
         dashboard.section.header.val = {
             "⠀⠀⠀⣾⣿⣿⣿⣿⣦⡀⢸⣿⣿⣿⣿⠃⣰⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⠀⢀⣴⣿⣿⣿⣿⣿⣿⣿⣿⣿⡆⢸⣿⣿⣿⣿⡄⠀⠀⠀⠀⣠⣾⣿⣿⣿⣿⡿⢁⣿⣿⣿⣿⡇⠀⣸⣿⣿⣿⣿⣷⣄⠀⢀⣴⣿⣿⣿⣿⡟",
@@ -21,6 +20,13 @@ return {
             "⣼⣿⣿⣿⡏⠀⠀⢸⣿⣿⣿⣿⡇⢀⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡏⠀⠀⠈⠻⢿⣿⣿⣿⣿⣿⡿⠟⠋⠀⠀⠀⠀⠀⠸⣿⣿⣿⣿⣿⠋⠀⠀⠀⠀⠀⠀⣿⣿⣿⣿⡟⠀⢸⣿⣿⣿⣿⠀⠀⠀⠀⠀⣾⣿⣿⣿⣿⠀⠀⠀",
             "",
         }
+        dashboard.section.footer.val = {
+            "",
+            "",
+            "All these bytes will be lost in time,",
+            "              like tears in the rain.",
+        }
+        dashboard.section.footer.opts.hl = "Comment"
         require("alpha").setup(dashboard.opts)
     end,
 }
