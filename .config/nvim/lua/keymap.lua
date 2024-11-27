@@ -76,6 +76,14 @@ keymap.set({ "n", "v" }, "/", "/\\v", opts)
 opts.desc = "Find string (backward)"
 keymap.set({ "n", "v" }, "?", "?\\v", opts)
 
+-- Wrap comments. NOTE: The first form does not work (nothing happens), while
+-- the second one does. Huh?
+opts.desc = "Wrap comment block."
+-- keymap.set("n", "<leader>c", "gqgc", opts)
+keymap.set("n", "<leader>c", function()
+    vim.cmd.normal("gqgc")
+end, opts)
+
 -- Remap for dealing with word wrap.
 keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
