@@ -49,8 +49,17 @@ KEYTIMEOUT=25
 MODE_CURSOR_VIINS="red steady bar"
 
 # Preferred editor for local and remote sessions
-export EDITOR='nvim'
+export EDITOR="nvim"
+export VISUAL="nvim"
 
+# Make the less pager use case-insensitive search (also used
+# by `man`).
+export LESS="-i"
+
+# Make man pages more readable on wide screens by wrapping at 80 characters.
+export MANPAGER="fmt -w 80 | less"
+
+# Misc aliases.
 alias ls="ls --color"
 alias e=nvim
 alias g=lazygit
