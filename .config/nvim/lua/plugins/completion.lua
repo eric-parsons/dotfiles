@@ -5,7 +5,9 @@ return {
         dependencies = {
             "onsails/lspkind.nvim",
             "hrsh7th/cmp-nvim-lsp",
-            "hrsh7th/cmp-buffer",
+            -- TODO: Find a way to enable this only in buffers that don't have
+            -- a configured LSP. Otherwise, it adds a ton of noise.
+            -- "hrsh7th/cmp-buffer",
             "saadparwaiz1/cmp_luasnip",
             "L3MON4D3/LuaSnip",
             "rafamadriz/friendly-snippets",
@@ -25,12 +27,16 @@ return {
                     documentation = cmp.config.window.bordered(),
                 },
                 mapping = cmp.mapping.preset.insert({
-                    ["<C-Space>"] = cmp.mapping.complete(),
-                    ["<C-e>"] = cmp.mapping.abort(),
-                    -- Accept currently selected item. Set `select` to `false`
-                    -- to only confirm explicitly selected items.
-                    ["<CR>"] = cmp.mapping.confirm({ select = true }),
-                    ["<Tab>"] = cmp.mapping(function(fallback)
+                    -- TODO: I can't get this to work. It seems like it's
+                    -- supposed to manually open the completion popup, but it
+                    -- doesn't do anything?
+                    ["<c-space>"] = cmp.mapping.complete(),
+                    ["<c-e>"] = cmp.mapping.abort(),
+                    -- Make Enter or Space confirm the completion, but only if
+                    -- an item was explicitly selected.
+                    ["<cr>"] = cmp.mapping.confirm({ select = false }),
+                    ["<space>"] = cmp.mapping.confirm({ select = false }),
+                    ["<tab>"] = cmp.mapping(function(fallback)
                         if cmp.visible() then
                             cmp.select_next_item()
                         else
@@ -39,7 +45,7 @@ return {
                     end, { "i", "s" }),
                     -- Allow Tab and Shift+Tab as an alternate way to select
                     -- items in completion menu.
-                    ["<S-Tab>"] = cmp.mapping(function(fallback)
+                    ["<s-tab>"] = cmp.mapping(function(fallback)
                         if cmp.visible() then
                             cmp.select_prev_item()
                         else
@@ -47,12 +53,12 @@ return {
                         end
                     end, { "i", "s" }),
                     -- Move between placeholders in snippet.
-                    ["<S-Right>"] = cmp.mapping(function()
+                    ["<s-right>"] = cmp.mapping(function()
                         if luasnip.locally_jumpable(1) then
                             luasnip.jump(1)
                         end
                     end, { "i", "s" }),
-                    ["<S-Left>"] = cmp.mapping(function()
+                    ["<s-left>"] = cmp.mapping(function()
                         if luasnip.locally_jumpable(-1) then
                             luasnip.jump(-1)
                         end
@@ -61,7 +67,8 @@ return {
                 sources = cmp.config.sources({
                     { name = "luasnip" },
                     { name = "nvim_lsp" },
-                    { name = "buffer" },
+                    -- See comment in dependencies.
+                    -- { name = "buffer" },
                 }),
                 formatting = {
                     format = require("lspkind").cmp_format({

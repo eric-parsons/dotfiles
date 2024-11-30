@@ -107,6 +107,11 @@ opts.desc = "Go one window right"
 keymap.set("n", "<s-right>", "<c-w>l", opts)
 keymap.set("n", "<c-l>", "<c-w>l", opts)
 
+opts.desc = "Go to top left window"
+keymap.set("n", "<leader><pageup>", "<c-w>t", opts)
+opts.desc = "Go to bottom right window"
+keymap.set("n", "<leader><pagedown>", "<c-w>b", opts)
+
 -- ((( Buffers )))
 
 --NOTE: <leader>l is mapped in the Telescope settings to view the buffer list.
