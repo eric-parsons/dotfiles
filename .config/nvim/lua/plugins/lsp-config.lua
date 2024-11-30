@@ -3,7 +3,7 @@ return {
     event = { "BufReadPre", "BufNewFile" },
     config = function()
         local lspconfig = require("lspconfig")
-
+        local capabilities = require("cmp_nvim_lsp").default_capabilities()
         local keymap = vim.keymap
         local opts = { noremap = true, silent = true }
         local on_attach = function(_, bufnr)
@@ -52,12 +52,15 @@ return {
 
         lspconfig.cssls.setup({
             on_attach = on_attach,
+            capabilities = capabilities,
         })
         lspconfig.html.setup({
             on_attach = on_attach,
+            capabilities = capabilities,
         })
         lspconfig.lua_ls.setup({
             on_attach = on_attach,
+            capabilities = capabilities,
             settings = {
                 Lua = {
                     -- Make the language server recognize "vim" global.
@@ -76,6 +79,7 @@ return {
         })
         lspconfig.ts_ls.setup({
             on_attach = on_attach,
+            capabilities = capabilities,
         })
     end,
 }

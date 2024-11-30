@@ -122,6 +122,19 @@ keymap.set("n", "<s-tab>", "<cmd>bp<cr>", opts)
 opts.desc = "Close current buffer"
 keymap.set("n", "<leader>bd", "<cmd>bp|bd#<cr>", opts)
 
+-- S(y)nc files. These commands open a matching file associated with the
+-- current buffer in a new vertical split beside it. A matching file has the
+-- same root path as the current buffer, but with a different extension. Here I
+-- am using it to open a CSS file matching e.g. a .html/.jsx/.tsx file, or a
+-- matching unit test file. You could also use this for .c + .h files, or an
+-- aspx file and its "codebehind" file, and so on. This has the side effect of
+-- closing all other windows except for the two matching files, but I am OK
+-- with that.
+opts.desc = "Open matching CSS file"
+keymap.set("n", "<leader>yc", "<cmd>wincmd o | vs %:r.css<cr>", opts)
+opts.desc = "Open matching test file"
+keymap.set("n", "<leader>yt", "<cmd>wincmd o | vs %:r.test.%:e<cr>", opts)
+
 -- ((( Folds )))
 
 opts.desc = "Enable folds (indent)"
@@ -134,3 +147,4 @@ keymap.set("n", "<leader>zx", function()
     vim.o.foldmethod = "manual"
     vim.cmd.normal("zE")
 end, opts)
+
