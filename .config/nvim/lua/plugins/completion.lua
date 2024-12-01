@@ -36,6 +36,8 @@ return {
                     -- an item was explicitly selected.
                     ["<cr>"] = cmp.mapping.confirm({ select = false }),
                     ["<space>"] = cmp.mapping.confirm({ select = false }),
+                    -- Allow Tab and Shift+Tab as an alternate way to select
+                    -- items in completion menu.
                     ["<tab>"] = cmp.mapping(function(fallback)
                         if cmp.visible() then
                             cmp.select_next_item()
@@ -43,8 +45,6 @@ return {
                             fallback()
                         end
                     end, { "i", "s" }),
-                    -- Allow Tab and Shift+Tab as an alternate way to select
-                    -- items in completion menu.
                     ["<s-tab>"] = cmp.mapping(function(fallback)
                         if cmp.visible() then
                             cmp.select_prev_item()
@@ -52,7 +52,12 @@ return {
                             fallback()
                         end
                     end, { "i", "s" }),
-                    -- Move between placeholders in snippet.
+                    -- Move between placeholders in snippet. Some people also
+                    -- overload the tab key for this purpose as well, but that
+                    -- can get annoying if the completion menu happens to be
+                    -- open when you want to jump, which forces you to use
+                    -- Ctrl+e to close it first. Having dedicated keys for this
+                    -- purpose avoids that issue.
                     ["<s-right>"] = cmp.mapping(function()
                         if luasnip.locally_jumpable(1) then
                             luasnip.jump(1)

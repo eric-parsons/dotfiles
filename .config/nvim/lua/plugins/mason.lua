@@ -19,6 +19,7 @@ return {
                 "prettier",
                 "stylua",
                 "eslint_d",
+                "beautysh",
             },
         })
     end

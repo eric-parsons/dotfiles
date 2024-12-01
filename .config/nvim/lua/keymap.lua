@@ -28,6 +28,12 @@ keymap.set({ "n", "v" }, "<space>", "<Nop>", opts)
 -- useful in the vast majority of cases.
 keymap.set({ "n", "v" }, "<home>", "^", opts)
 
+-- Make page up/down work like Ctrl+U and Ctrl+D instead of Ctrl+B and Ctrl+F.
+-- The former work better with the "always centered" strategy (see
+-- options.lua).
+keymap.set({ "n", "v" }, "<pageup>", "<c-u>", opts)
+keymap.set({ "n", "v" }, "<pagedown>", "<c-d>", opts)
+
 -- Make common commands a bit faster. Saving one or two characters doesn't seem
 -- like a big deal, but these are used a LOT. Also, about 10% of the time that
 -- I try to quickly type e.g. ":w", it comes out as ":W" because the shift key
@@ -57,14 +63,13 @@ keymap.set("v", "<s-up>", ":m '<-2<cr>gv=gv", opts)
 -- moving the cursor.
 opts.desc = "Add blank line below"
 keymap.set("n", "<leader>o", [[:<C-u>call append(line("."),   repeat([""], v:count1))<cr>]], opts)
-
 opts.desc = "Add blank line above"
 keymap.set("n", "<leader>O", [[:<C-u>call append(line(".")-1, repeat([""], v:count1))<cr>]], opts)
 
 -- Whole file search and replace. These allow you to simply type "old/new"
 -- after. The "\v" part is "very magic" mode, which gives special symbols like
--- "|", "{", etc. their normal regex syntax meaning rather than being literals.
--- See :h magic.
+-- "|" , "{", etc. their normal regex syntax meaning rather than being
+-- literals. See :h magic.
 opts.desc = "Replace all in current buffer"
 keymap.set("n", "<leader>ra", ":%s/\\v/g<left><left>", opts)
 opts.desc = "Replace with confirmation in current buffer"
@@ -79,14 +84,18 @@ keymap.set({ "n", "v" }, "?", "?\\v", opts)
 -- Wrap comments. NOTE: The first form does not work (nothing happens), while
 -- the second one does. Huh?
 opts.desc = "Wrap comment block."
--- keymap.set("n", "<leader>c", "gqgc", opts)
+-- keymap.set("n", "<leader>c", "gwgc", opts)
 keymap.set("n", "<leader>c", function()
-    vim.cmd.normal("gqgc")
+    vim.cmd.normal("gwgc")
 end, opts)
 
--- Remap for dealing with word wrap.
+-- Remap for dealing with word wrap. Moving up and down will now move within a
+-- wrapped line that spans several visible lines, rather that jumping out of it
+-- to the next/previous actual line.
 keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
+keymap.set("n", "<up>", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+keymap.set("n", "<down>", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
 -- ((( Windows )))
 
@@ -108,9 +117,9 @@ keymap.set("n", "<s-right>", "<c-w>l", opts)
 keymap.set("n", "<c-l>", "<c-w>l", opts)
 
 opts.desc = "Go to top left window"
-keymap.set("n", "<leader><pageup>", "<c-w>t", opts)
+keymap.set("n", "<s-home>", "<c-w>t", opts)
 opts.desc = "Go to bottom right window"
-keymap.set("n", "<leader><pagedown>", "<c-w>b", opts)
+keymap.set("n", "<s-end>", "<c-w>b", opts)
 
 -- ((( Buffers )))
 
@@ -151,5 +160,6 @@ opts.desc = "Remove folds"
 keymap.set("n", "<leader>zx", function()
     vim.o.foldmethod = "manual"
     vim.cmd.normal("zE")
+    vim.cmd.normal("zz")
 end, opts)
 

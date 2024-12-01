@@ -18,6 +18,7 @@ return {
             local telescope = require("telescope")
             local actions = require("telescope.actions")
             local builtin = require("telescope.builtin")
+            local themes = require("telescope.themes")
 
             telescope.setup({
                 defaults = {
@@ -68,11 +69,15 @@ return {
             keymap.set("n", "<leader>fs", builtin.live_grep, opts)
 
             opts.desc = "List buffers"
-            keymap.set("n", "<leader>l", builtin.buffers, opts)
+            keymap.set("n", "<leader>l", function()
+                builtin.buffers(themes.get_dropdown({
+                    previewer = false,
+                }))
+            end, opts)
 
             opts.desc = "Fuzzy search in current buffer"
             keymap.set("n", "<leader>/", function()
-                builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
+                builtin.current_buffer_fuzzy_find(themes.get_dropdown({
                     winblend = 10,
                     previewer = false,
                 }))
