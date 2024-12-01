@@ -85,9 +85,9 @@ zstyle ':completion:*' menu select
 export LS_COLORS="di=34:ln=35:so=32:pi=33:ex=31:bd=34;46:cd=34;43:su=30;41:sg=30;46:tw=30;42:ow=30;43"
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 
-#####
-# bat
-#####
+#######
+# bat #
+#######
 
 export BAT_THEME=ansi
 
@@ -146,7 +146,7 @@ MODE_CURSOR_VIINS="red steady bar"
 
 # Use eza as a replacement for ls and tree commands.
 alias ls="eza -w 80 --color=auto --icons=auto"
-alias ll="eza -l --color=auto --icons=auto --git --time-style=long-iso"
+alias ll="eza -lh --color=auto --icons=auto --git --time-style=long-iso"
 alias tree="eza --tree -I 'node_modules|.git' --color=auto --icons=auto"
 # Paginated versions that preserve colors and icons.
 function llp () {
@@ -184,4 +184,3 @@ alias np="npm run prettier"
 ##########
 
 eval "$(oh-my-posh init zsh --config $XDG_CONFIG_HOME/oh-my-posh/custom.toml)"
-
