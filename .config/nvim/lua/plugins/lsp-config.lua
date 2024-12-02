@@ -81,5 +81,9 @@ return {
             on_attach = on_attach,
             capabilities = capabilities,
         })
+        lspconfig.hls.setup({
+            on_attach = on_attach,
+            capabilities = capabilities,
+        })
     end,
 }
