@@ -1,5 +1,6 @@
 return {
     {
+        -- Replacement status line.
         "nvim-lualine/lualine.nvim",
         config = function()
             local utils = require("lualine.utils.utils")
@@ -100,7 +101,17 @@ return {
                         title = "Shell",
                         icon = "!",
                     },
+                    lua = {
+                        conceal = false,
+                    },
                 },
+            },
+            messages = {
+                -- This invalidates the rest of the config below. I turned off
+                -- the messages UI for now since there are too many quirks and
+                -- annoyances with it that I don't think will be easy to get
+                -- rid of without heavy customization.
+                enabled = false,
             },
             presets = {
                 cmdline_output_to_split = true,
