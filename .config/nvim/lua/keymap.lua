@@ -1,8 +1,8 @@
--- NOTE: See also the config for LSP, file tree, and Telescope which also add
--- keymaps.
+-- NOTE: See also the config for LSP, file tree, completion, and Telescope,
+-- which also add keymaps.
 
--- NOTE: I use a programmable keyboard that lets me use actual arrow keys, pg
--- up/down, etc. without moving my hand from home row. I also use Colemak
+-- NOTE: I use a programmable keyboard that lets me use actual arrow keys, Pg
+-- Up/Down, etc. without moving my hand from home row. I also use Colemak
 -- rather than QWERTY layout. Thus these bindings are biased in favor of using
 -- navigation keys over HJKL. There are still some bindings for the latter in
 -- case I am stuck without my keyboard but they are there more as an
@@ -75,12 +75,6 @@ keymap.set("n", "<leader>ra", ":%s/\\v/g<left><left>", opts)
 opts.desc = "Replace with confirmation in current buffer"
 keymap.set("n", "<leader>rc", ":%s/\\v/gc<left><left>", opts)
 
--- Similar to above, use "very magic" mode for searching.
-opts.desc = "Find string (forward)"
-keymap.set({ "n", "v" }, "/", "/\\v", opts)
-opts.desc = "Find string (backward)"
-keymap.set({ "n", "v" }, "?", "?\\v", opts)
-
 -- Wrap comments. NOTE: The first form does not work (nothing happens), while
 -- the second one does. Huh?
 opts.desc = "Wrap comment block."
@@ -118,6 +112,7 @@ keymap.set("n", "<c-l>", "<c-w>l", opts)
 
 opts.desc = "Go to top left window"
 keymap.set("n", "<s-home>", "<c-w>t", opts)
+
 opts.desc = "Go to bottom right window"
 keymap.set("n", "<s-end>", "<c-w>b", opts)
 
@@ -146,6 +141,7 @@ keymap.set("n", "<leader>bd", "<cmd>bp|bd#<cr>", opts)
 -- with that.
 opts.desc = "Open matching CSS file"
 keymap.set("n", "<leader>yc", "<cmd>wincmd o | vs %:r.css<cr>", opts)
+
 opts.desc = "Open matching test file"
 keymap.set("n", "<leader>yt", "<cmd>wincmd o | vs %:r.test.%:e<cr>", opts)
 
