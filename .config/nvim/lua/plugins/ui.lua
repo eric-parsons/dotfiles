@@ -88,43 +88,6 @@ return {
         end,
     },
     {
-        -- Improves the UI of popups, messages, and the command line.
-        "folke/noice.nvim",
-        event = "VeryLazy",
-        dependencies = {
-            "MunifTanjim/nui.nvim",
-        },
-        opts = {
-            cmdline = {
-                format = {
-                    filter = {
-                        title = "Shell",
-                        icon = "!",
-                    },
-                    lua = {
-                        conceal = false,
-                    },
-                },
-            },
-            messages = {
-                -- This invalidates the rest of the config below. I turned off
-                -- the messages UI for now since there are too many quirks and
-                -- annoyances with it that I don't think will be easy to get
-                -- rid of without heavy customization.
-                enabled = false,
-            },
-            presets = {
-                cmdline_output_to_split = true,
-            },
-            views = {
-                cmdline_output = {
-                    enter = true,
-                    format = "notify",
-                },
-            },
-        },
-    },
-    {
         -- Add indentation guides even on blank lines.
         "lukas-reineke/indent-blankline.nvim",
         main = "ibl",

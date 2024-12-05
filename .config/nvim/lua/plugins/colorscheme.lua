@@ -21,7 +21,6 @@ return {
             ]])
         end,
     },
-
     -- {
     --     "eric-parsons/arctic.nvim",
     --     dependencies = {
