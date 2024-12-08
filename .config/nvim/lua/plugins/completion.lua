@@ -13,6 +13,7 @@ return {
             "rafamadriz/friendly-snippets",
         },
         config = function()
+            vim.opt.completeopt = { "menu", "menuone", "noselect" }
             local cmp = require("cmp")
             local luasnip = require("luasnip")
             require("luasnip.loaders.from_vscode").lazy_load()
@@ -27,15 +28,12 @@ return {
                     documentation = cmp.config.window.bordered(),
                 },
                 mapping = cmp.mapping.preset.insert({
-                    -- TODO: I can't get this to work. It seems like it's
-                    -- supposed to manually open the completion popup, but it
-                    -- doesn't do anything?
-                    ["<c-space>"] = cmp.mapping.complete(),
                     ["<c-e>"] = cmp.mapping.abort(),
-                    -- Make Enter or Space confirm the completion, but only if
-                    -- an item was explicitly selected.
+                    -- Make Enter confirm the completion, but only if an item
+                    -- was explicitly selected. Or else Ctrl+Y will auto-select
+                    -- the first item and complete.
                     ["<cr>"] = cmp.mapping.confirm({ select = false }),
-                    ["<space>"] = cmp.mapping.confirm({ select = false }),
+                    ["<c-y>"] = cmp.mapping.confirm({ select = true }),
                     -- Allow Tab and Shift+Tab as an alternate way to select
                     -- items in completion menu.
                     ["<tab>"] = cmp.mapping(function(fallback)
@@ -82,13 +80,23 @@ return {
                 },
                 sorting = {
                     comparators = {
-                        cmp.config.compare.offset,
-                        cmp.config.compare.exact,
-                        cmp.config.compare.score,
+                        cmp.config.compare.locality,
                         cmp.config.compare.recently_used,
                         cmp.config.compare.kind,
+                        cmp.config.compare.score,
                     },
                 },
+                enabled = function()
+                    -- Disable completion in comments.
+                    local context = require("cmp.config.context")
+                    -- Keep command mode completion enabled when cursor is in a comment.
+                    if vim.api.nvim_get_mode().mode == "c" then
+                        return true
+                    else
+                        return not context.in_treesitter_capture("comment")
+                            and not context.in_syntax_group("Comment")
+                    end
+                end,
             })
         end,
     },
