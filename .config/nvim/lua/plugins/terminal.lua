@@ -24,8 +24,8 @@ return {
                 keymap.set("t", "<s-down>", "<cmd>wincmd j<cr>", opts)
                 keymap.set("t", "<s-up>", "<cmd>wincmd k<cr>", opts)
                 keymap.set("t", "<s-right>", "<cmd>wincmd l<cr>", opts)
-                keymap.set("t", "<s-home>", "<cmd>wincmd t", opts)
-                keymap.set("t", "<s-end>", "<cmd>wincmd b", opts)
+                keymap.set("t", "<s-home>", "<cmd>wincmd t<cr>", opts)
+                keymap.set("t", "<s-end>", "<cmd>wincmd b<cr>", opts)
                 keymap.set("t", "<c-w>", "<c-\\><c-n><c-w>", opts)
             end
 
