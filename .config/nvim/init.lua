@@ -4,6 +4,7 @@
 
 require("options")
 require("keymap")
+require("lsp")
 
 -- Install `lazy.nvim` plugin manager if not installed.
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
