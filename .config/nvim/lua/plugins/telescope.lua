@@ -36,6 +36,11 @@ return {
                             -- them scroll the preview window.
                             ["<pageup>"] = actions.preview_scrolling_up,
                             ["<pagedown>"] = actions.preview_scrolling_down,
+                            -- Swap the default behaviour for Esc & Ctrl-E so
+                            -- that Esc closes the dialog instead of going to
+                            -- normal mode.
+                            ["<esc>"] = actions.close,
+                            ["<C-e>"] = { "<esc>", type = "command" },
                         },
                     },
                 },
