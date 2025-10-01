@@ -185,8 +185,8 @@ alias np="npm run prettier"
 
 eval "$(oh-my-posh init zsh --config $XDG_CONFIG_HOME/oh-my-posh/custom.toml)"
 
-###############
-# Haskell Tools
-###############
+#################
+# Haskell Tools #
+#################
 
 [ -f "$HOME/.ghcup/env" ] && source "$HOME/.ghcup/env" # ghcup-env

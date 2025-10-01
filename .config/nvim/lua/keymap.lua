@@ -131,6 +131,16 @@ keymap.set("n", "<s-tab>", "<cmd>bp<cr>", opts)
 opts.desc = "Close current buffer"
 keymap.set("n", "<leader>bd", "<cmd>bp|bd#<cr>", opts)
 
+-- Delete current buffer and underlying file from disk.
+opts.desc = "Remove current file from disk"
+keymap.set("n", "<leader>rm", function()
+    local choice = vim.fn.confirm("Delete current file?", "&Yes\n&No")
+    if choice == 1 then
+        vim.fn.delete(vim.fn.expand("%:p"))
+        vim.cmd("bp|bd#")
+    end
+end, opts)
+
 -- Closes any open window whose current buffer matches a substring.
 local closeWindowWithBufferMatching = function(substring)
     for _, winId in ipairs(vim.api.nvim_list_wins()) do
