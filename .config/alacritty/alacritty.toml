@@ -1,0 +1,22 @@
+general.import = [ "~/.config/omarchy/current/theme/alacritty.toml" ]
+
+[env]
+TERM = "xterm-256color"
+
+[font]
+normal = { family = "TwilioSansM Nerd Font" }
+bold = { family = "TwilioSansM Nerd Font" }
+italic = { family = "TwilioSansM Nerd Font" }
+size = 10
+
+[window]
+padding.x = 14
+padding.y = 14
+decorations = "None"
+opacity = 0
+
+[keyboard]
+bindings = [
+{ key = "Insert", mods = "Shift", action = "Paste" },
+{ key = "Insert", mods = "Control", action = "Copy" }
+]
