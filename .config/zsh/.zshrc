@@ -28,7 +28,7 @@ export VISUAL="nvim"
 export LESS="-isR"
 
 # Make man pages more readable on wide screens by wrapping at 80 characters.
-export MANPAGER="fmt -w 80 | less"
+export MANPAGER="sh -c 'fmt | less'"
 
 ###################
 # iTerm2 Profiles #
@@ -44,7 +44,9 @@ function prof() {
 
 # Pick a random profile on startup. Do this as early as posssible so that there
 # is no delay before the image shows. 
-prof $(jot -r 1 1 11)
+if [[ $(uname) == "Darwin" ]]; then
+    prof $(jot -r 1 1 11)
+fi
 
 ###########
 # Plugins #
@@ -150,10 +152,10 @@ alias ll="eza -lh --color=auto --icons=auto --git --time-style=long-iso"
 alias tree="eza --tree -I 'node_modules|.git' --color=auto --icons=auto"
 # Paginated versions that preserve colors and icons.
 function llp () {
-    ll --color=always --icons=always $@ | less
+    ll --color=always --icons=always $@ | less -r
 }
 function treep () {
-    tree --color=always --icons=always $@ | less
+    tree --color=always --icons=always $@ | less -r
 }
 
 # Misc
