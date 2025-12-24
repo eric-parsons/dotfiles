@@ -7,10 +7,10 @@ return {
     },
     keys = {
         {
-            -- Open in the current working directory
+            -- Open at the current file.
             "<leader>e",
-            "<cmd>Yazi cwd<cr>",
-            desc = "Open the file manager in nvim's working directory",
+            "<cmd>Yazi<cr>",
+            desc = "Open the file manager at the current file.",
         },
     },
     opts = {
