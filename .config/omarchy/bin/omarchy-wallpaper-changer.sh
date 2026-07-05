@@ -6,7 +6,6 @@
 #
 # Add "exec-once = hyprpaper" to autostart.conf before this script.
 
-
 set -euo pipefail
 
 while ! pgrep "hyprpaper" > /dev/null; do
@@ -23,8 +22,7 @@ pkill -x swaybg || true
 
 wallpaper_dir=$XDG_CONFIG_HOME/omarchy/current/theme/backgrounds
 
-# TODO: Read from disk. Change logic so that it wraps if there are < 9 files
-# (so if there are e.g. only 3 images, they would be 1 2 3 1 2 3 1 2 3).
+# These must match what is preloaded in hyprpaper.conf.
 declare -A WS_IMG=(
     [1]="$wallpaper_dir/blade-runner-1.jpg"
     [2]="$wallpaper_dir/blade-runner-2.jpg"
@@ -36,9 +34,6 @@ declare -A WS_IMG=(
     [8]="$wallpaper_dir/blade-runner-8.jpg"
     [9]="$wallpaper_dir/blade-runner-9.jpg"
 )
-for img in "${WS_IMG[@]}"; do
-    hyprctl hyprpaper preload $img
-done
 
 set_wall_for_monitor_ws() {
     local mon="$1" ws="$2" img="${WS_IMG[$ws]:-}"
