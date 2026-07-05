@@ -186,9 +186,3 @@ keymap.set("n", "<leader>zx", function()
     vim.cmd.normal("zz")
 end, opts)
 
--- Recenter after opening/closing folds. Not every command is covered here,
--- just commonly used ones.
-local foldCommands = { "zo", "zO", "zc", "zC", "za", "zA", "zX", "zM" }
-for _, fc in ipairs(foldCommands) do
-    keymap.set("n", fc, fc .. "zz")
-end

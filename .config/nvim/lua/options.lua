@@ -43,23 +43,23 @@ vim.opt.completeopt = "menuone,noselect"
 vim.opt.foldnestmax = 3
 vim.opt.foldcolumn = "auto"
 
--- Keep the cursor in the center of the screen when possible.
--- The difference between these two approaches is that the auto command will
--- do this even at the end of the file, whereas the scrolloff method won't.
--- vim.opt.scrolloff = 999
-vim.cmd([[
-augroup KeepCentered
-autocmd!
-autocmd CursorMoved * normal! zz
-augroup END
-]])
+-- Keep the cursor vertically centered within the screen when possible (i.e.
+-- for all but the first half screen of text in the buffer).
+vim.api.nvim_create_autocmd("CursorMoved", {
+    callback = function()
+        vim.cmd.normal("zz")
+    end,
+})
+-- Recenter after opening/closing folds. Not every command is covered here,
+-- just commonly used ones.
+local foldCommands = { "zo", "zO", "zc", "zC", "za", "zA", "zX", "zM" }
+for _, fc in ipairs(foldCommands) do
+    vim.keymap.set("n", fc, fc .. "zz")
+end
 
 -- Highlight on yank
-local highlight_group = vim.api.nvim_create_augroup("YankHighlight", { clear = true })
 vim.api.nvim_create_autocmd("TextYankPost", {
     callback = function()
         vim.highlight.on_yank()
     end,
-    group = highlight_group,
-    pattern = "*",
 })
