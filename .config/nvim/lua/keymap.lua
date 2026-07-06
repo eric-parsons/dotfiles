@@ -186,3 +186,25 @@ keymap.set("n", "<leader>zx", function()
     vim.cmd.normal("zz")
 end, opts)
 
+-- ((( Surround Plugin )))
+
+-- Replace "ys", "yss", etc. with just "s", "ss", etc. The default
+-- is a bit odd since y is normally used for yanking, and typing an
+-- extra character is a bit clunky. This overwrites the built-in
+-- "s" and "S" operations, but those are just synonyms for "cl" and
+-- "cc", respectively.
+
+vim.g.nvim_surround_no_normal_mappings = true
+
+vim.keymap.set("n", "s", "<Plug>(nvim-surround-normal)", {
+    desc = "Add a surrounding pair around a motion (normal mode)",
+})
+vim.keymap.set("n", "ss", "<Plug>(nvim-surround-normal-cur)", {
+    desc = "Add a surrounding pair around the current line (normal mode)",
+})
+vim.keymap.set("n", "S", "<Plug>(nvim-surround-normal-line)", {
+    desc = "Add a surrounding pair around a motion, on new lines (normal mode)",
+})
+vim.keymap.set("n", "SS", "<Plug>(nvim-surround-normal-cur-line)", {
+    desc = "Add a surrounding pair around the current line, on new lines (normal mode)",
+})

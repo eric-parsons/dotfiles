@@ -5,7 +5,14 @@ return {
         dependencies = {
             "nvim-treesitter/nvim-treesitter-textobjects",
             lazy = true,
+            branch = "master",
         },
+        -- Master was frozen and a major rewrite happened which is now on
+        -- "main", changing the scope of what this plugin does and removing
+        -- functionality. Not long after, the maintainer archived the entire
+        -- repo. Not going to bother with master -> main breaking changes and
+        -- will just wait for some alternative to this plugin. 
+        branch = "master",
         build = ":TSUpdate",
         event = { "BufReadPre", "BufNewFile" },
         opts = {
@@ -147,13 +154,13 @@ return {
                     enable = true,
                     swap_next = {
                         ["<leader>xa"] = "@parameter.inner", -- swap parameters/argument with next
-                        ["<leader>x:"] = "@property.outer",  -- swap object property with next
-                        ["<leader>xm"] = "@function.outer",  -- swap function with next
+                        ["<leader>x:"] = "@property.outer", -- swap object property with next
+                        ["<leader>xm"] = "@function.outer", -- swap function with next
                     },
                     swap_previous = {
                         ["<leader>Xa"] = "@parameter.inner", -- swap parameters/argument with prev
-                        ["<leader>X:"] = "@property.outer",  -- swap object property with prev
-                        ["<leader>Xm"] = "@function.outer",  -- swap function with previous
+                        ["<leader>X:"] = "@property.outer", -- swap object property with prev
+                        ["<leader>Xm"] = "@function.outer", -- swap function with previous
                     },
                 },
             },
