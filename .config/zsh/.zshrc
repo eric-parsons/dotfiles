@@ -168,7 +168,7 @@ alias b=popd # "back", like in a browser.
 
 # Alias to manage bare repo which is used for versioning dotfiles in the home
 # directory.
-alias df="git --git-dir=$HOME/dotfiles/ --work-tree=$HOME"
+alias dot="git --git-dir=$HOME/dotfiles/ --work-tree=$HOME"
 
 # npm aliases
 alias ni="npm install"
@@ -191,4 +191,5 @@ eval "$(oh-my-posh init zsh --config $XDG_CONFIG_HOME/oh-my-posh/custom.toml)"
 # Haskell Tools #
 #################
 
-[ -f "$HOME/.ghcup/env" ] && source "$HOME/.ghcup/env" # ghcup-env
+
+[ -f "$HOME/.ghcup/env" ] && . "$HOME/.ghcup/env" # ghcup-env
