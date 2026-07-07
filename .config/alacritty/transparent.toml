@@ -7,13 +7,13 @@ TERM = "xterm-256color"
 normal = { family = "TwilioSansM Nerd Font" }
 bold = { family = "TwilioSansM Nerd Font" }
 italic = { family = "TwilioSansM Nerd Font" }
-size = 10
+size = 12
 
 [window]
 padding.x = 14
 padding.y = 14
 decorations = "None"
-opacity = 1
+opacity = 0
 
 [keyboard]
 bindings = [
